@@ -1,6 +1,13 @@
 #include <iostream>
 #include "persona.h"
 
+/*
+* Author: Julio Conchas
+* Email:  conchasjimenez@gmail.com
+* Path:   libs/
+* File:   persona.cpp
+*/
+
 Persona::Persona(){}
 string Persona::getName(){ return name; }
 string Persona::getApellido(){ return apellido; }

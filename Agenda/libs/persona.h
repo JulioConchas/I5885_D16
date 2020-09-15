@@ -3,6 +3,13 @@
 
 #include <string>
 
+/*
+* Author: Julio Conchas
+* Email:  conchasjimenez@gmail.com
+* Path:   libs/
+* File:   persona.h
+*/
+
 using namespace std;
 
 class Persona{
