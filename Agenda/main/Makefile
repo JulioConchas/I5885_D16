@@ -25,7 +25,7 @@ CFLAGS=-I../libs
 COMPILER=c++ -c -g
 
 practicauno: $(OBJETOS)
-	c++  $(OBJETOS) -o practicauno
+	c++  $(OBJETOS) -o agenda
 
 menu.o: ../libs/menu.cpp
 	$(COMPILER) ../libs/menu.cpp -o menu.o
@@ -45,6 +45,6 @@ main.o: main.o ../libs/menu.h
 #utility targets
 run:
 	make clean
-	./practicauno
+	./agenda
 clean:
 	rm -Rf *.o

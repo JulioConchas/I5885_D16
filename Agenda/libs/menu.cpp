@@ -6,38 +6,32 @@ void Menu::header(){
     system("clear");
     cout << "|==============|" << endl;
     cout << "|Julio Conchas.|" << endl;
-    cout << "|Pracitca 1:   |" << endl;
-    cout << "|-Delimitadores|" << endl;
+    cout << "|    Agenda    |" << endl;
     cout << "|==============|" << endl;
     cout << "|              |" << endl;
 }
 void Menu::headerList(){
-    cout << "|=================================|" << endl;
-    cout << "|  Nombre  | Edad | Peso | Altura |" << endl;
+    cout << "|========================================|" << endl;
+    cout << "|  Nombre  | Apellido | Edad |  Telefono |" << endl;
 }
 void Menu::printMenu(Personlist& p){
 
     if (p.getSize() != 0) {
-        cout << "|[1] Insertar..|" << endl;
+        cout << "|[1] Agregar...|" << endl;
         cout << "|[2] Eliminar..|" << endl;
         cout << "|[3] Mostrar...|" << endl;
-        cout << "|[4] Guardar...|" << endl;
-        cout << "|[5] Buscar....|" << endl;
-        cout << "|[6] Modificar.|" << endl;
         cout << "|[7] Salit.....|" << endl;
     }
     else{
-        cout << "|[1] Insertar..|" << endl;
+        cout << "|[1] Agregar...|" << endl;
         cout << "|[7] Salit.....|" << endl;
     }
 }
 void Menu::mainMenu(Personlist &p){
     int opt,edad;
-    float peso,altura;
-    string name,killname;
+    string name,killname,apellido,tel;
     Persona dude;
-    int flagName = 0,flagEdad = 0,flagPeso = 0, flagAltura = 0;
-
+    int flagName = 0,flagApellido,flagEdad = 0,flagTelefono;
     do{
         header();
         printMenu(p);
@@ -45,7 +39,7 @@ void Menu::mainMenu(Personlist &p){
         switch (opt) {
             case 1:
                 do{
-                    cout << "Ingresa el nombre: " << endl;
+                    cout << "Ingresa el Nombre: " << endl;
                     cin >> name;
                     if(regex_match(name,regex("[a-zA-Z]+[a-zA-Z]"))){
                         dude.setName(name);
@@ -55,6 +49,17 @@ void Menu::mainMenu(Personlist &p){
                         cout << "( " << name << ") Nombre no permitido " << endl;
                     }
                 }while(flagName != 1);
+                do{
+                    cout << "Ingresa el Apellido: " << endl;
+                    cin >> apellido;
+                    if(regex_match(apellido,regex("[a-zA-Z]+[a-zA-Z]"))){
+                        dude.setApellido(apellido);
+                        flagApellido = 1;
+                     }
+                    else{
+                        cout << "( " << name << ") Nombre no permitido " << endl;
+                    }
+                }while(flagApellido != 1);
                 do{
                     cout << "Ingresa la edad:  " << endl;
                     cin >> edad;
@@ -72,39 +77,13 @@ void Menu::mainMenu(Personlist &p){
                     }
                 }while(flagEdad != 1);
                 do{
-                    cout << "Ingrese el peso: " << endl;
-                    cin >> peso;
-                    if (cin.fail()) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-                        cout << "( " << peso << ") peso no permitida " << endl;
-                    }
-                    if(peso < 100 ){
-                        dude.setPeso(peso);
-                        flagPeso = 1;
-                     }
-                    else{
-                        cout << "( " << peso << ") peso no permitida " << endl;
-                    }
-                }while(flagPeso != 1);
-                do{
-                    cout << "Ingrese la altura: " << endl;
-                    cin >> altura;
-                    if (cin.fail()) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-                        cout << "( " << altura << ") altura no permitida " << endl;
-                    }
-                    else if(altura < 2 ){
-                        dude.setAltura(altura);
-                        flagAltura= 1;
-                     }
-                    else{
-                        cout << "( " << altura << ") altura no permitida " << endl;
-                    }
-                }while(flagAltura != 1);
+                    cout << "Ingrese el Telefono: " << endl;
+                    cin >> tel;
+                    dude.setTel(tel);
+                    flagTelefono = 1;
+                }while(flagTelefono != 1);
                 p.insertar(dude);
-                flagName = 0,flagEdad = 0,flagPeso = 0, flagAltura = 0;
+                flagName = 0,flagApellido = 0, flagEdad = 0, flagTelefono = 0;
                 enterToContinue();
             break;
             case 2:
@@ -124,37 +103,6 @@ void Menu::mainMenu(Personlist &p){
                 cout << "|     Lista    |" << endl << "|   Personas   |" << endl;
                 headerList();
                 p.print();
-                enterToContinue();
-            break;
-            case 4:
-                if (p.save()) {
-                    cout << "Guardado exitosamente" << endl;
-                }
-                else{
-                    cout << "Error hay algun problema al guardad" << endl;
-                }
-                enterToContinue();
-            break;
-            case 5:
-                header();
-                cout << "|    Buscar    |" << endl;
-                cout << "| Ingresa el nombre de quien quieres buscar |" << endl;
-                cin >> killname;
-                if (!p.buscar(killname)) {
-                    cout << killname << " No encontrado" << endl;
-                }
-                enterToContinue();
-            break;
-            case 6:
-                header();
-                cout << "|  Modificar   |" << endl;
-                headerList();
-                p.print();
-                cout << "| Ingresa el nombre de quien quieres modificar |" << endl;
-                cin >> killname;
-                if (!p.modificar(killname)) {
-                    cout << killname << " Error al modificar " << endl;
-                }
                 enterToContinue();
             break;
         }

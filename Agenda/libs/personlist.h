@@ -22,17 +22,11 @@ class Personlist {
 private:
     Node *head;
     int size;
-    void inicializar();
-    bool load();
-    Persona split_data(string);
 public:
     Personlist();
     ~Personlist();
     void insertar(Persona);
     bool eliminar(string);
-    bool buscar(string);
-    bool modificar(string);
-    bool save();
     void print();
     int getSize();
 };

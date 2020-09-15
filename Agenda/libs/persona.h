@@ -8,23 +8,23 @@ using namespace std;
 class Persona{
 private:
     string name;
+    string apellido;
     int edad;
-    float peso;
-    float altura;
+    string tel;
 public:
     Persona();
 
     string getName();
+    string getApellido();
     int getEdad();
-    float getPeso();
-    float getAltura();
+    string getTel();
 
     string toString();
     string toString01();
 
     void setName(string);
+    void setApellido(string);
     void setEdad(int);
-    void setPeso(float);
-    void setAltura(float);
+    void setTel(string);
 };
 #endif
