@@ -22,9 +22,9 @@ public class Main extends JFrame implements ActionListener {
     private JLabel name_label,title_label;
     private MatrizPanel mp;
     
-    private int keyNumber=0,_TIME=1;
+    private int keyNumber=0,_TIME=10;
 
-    private boolean game_flag=true;
+    private boolean game_flag=false;
     
     public Main() {
         
@@ -58,24 +58,33 @@ public class Main extends JFrame implements ActionListener {
         
         play_btn.addActionListener(this);
         pause_btn.addActionListener(this);
+        
     }
     public void game_bucle() {
         while(true) {
             while(game_flag) {
                 System.out.println("jugando!!");
-                if (mp.getKeyNumber() == 5) { mp.setKeyNumber(0); }
-                else { mp.setKeyNumber(mp.getKeyNumber()+1); }
-                mp.updateUI();
+                mp.setGameState(true);
+                if(mp.isAnAttack()) {
+                  mp.updateQueenP(5);
+                  mp.updateUI();
+                }
+                else {
+                    System.out.println("no attack");
+                    game_flag = false;
+                }
+                // En base a la evaluación echa por la clase reina se moveran los puntos
                 try {
-                TimeUnit.SECONDS.sleep(_TIME);
+                TimeUnit.MILLISECONDS.sleep(_TIME);
                 } catch (InterruptedException e1) {
                 e1.printStackTrace();
                 }
             }
             while(!game_flag) {
                 System.out.println("Pausado");
+                //mp.printQueensPosition();
                 try {
-                TimeUnit.SECONDS.sleep(_TIME);
+                TimeUnit.MILLISECONDS.sleep(_TIME);
                 } catch (InterruptedException e1) {
                 e1.printStackTrace();
                 }
@@ -108,6 +117,9 @@ public class Main extends JFrame implements ActionListener {
        else if(e.getSource() == pause_btn) {
            game_flag=false;
        }
+    }
+    public void moveRowAndColumn(int row, int column) {
+        
     }
 
 }
